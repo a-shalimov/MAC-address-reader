@@ -30,9 +30,6 @@ wb = Workbook()
 ws = wb.active
 
 def get_frame():
-    """
-    Capture a frame from the video feed and display it in the video label.
-    """
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     video_label.imgtk = ImageTk.PhotoImage(image=PILImage.fromarray(gray))
@@ -41,9 +38,6 @@ def get_frame():
 
 
 def capture():
-    """
-    Capture a frame from the video feed and try to read a QR code or perform OCR to recognize a MAC address.
-    """
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     codes = pyzbar.decode(gray)
@@ -63,9 +57,6 @@ def capture():
 
 
 def approve():
-    """
-    Approve the recognized MAC address and add it to the listbox and worksheet.
-    """
     mac_address = mac_label.cget("text").split()[-1]
 
     if mac_address not in mac_listbox.get(0, END):
@@ -76,12 +67,6 @@ def approve():
 
 
 def key_press(event):
-    """
-    Handle key press events to capture, approve or deny a MAC address.
-    
-    Parameters: 
-        event (obj): The key press event.
-    """
     if event.char == 'c':
         capture()
     elif event.char == 'a':
